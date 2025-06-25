@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IMRCP View Scenarios</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style/w3.css"/> 
+		<link rel="stylesheet" href="style/pure-min.css"/>
+		<link href="style/jquery/themes/overcast/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<link href="style/jquery/jquery.ui.labeledslider.min.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="style/font-awesome.min.css"/>
+		<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"/>
+		<link href="style/jquery/jquery.datetimepicker.css" rel="stylesheet">
+		<link href="style/jquery/jquery.notifications.dialog.css" rel="stylesheet" />
+		<link href="style/jquery/jquery.divStack.css" rel="stylesheet" />
+		<link href="style/imrcp.css" rel="stylesheet">
+		<link href="style/scenarios.css" rel="stylesheet" />
+		<script type="text/javascript" src="script/jquery/jquery.js"></script>
+		<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script> 
+		<script type="text/javascript" src="script/jquery/jquery-ui.js"></script>
+		<script type="text/javascript" src="script/moment.min.js"></script>
+		<script type="text/javascript" src="script/Chart.min.js"></script>
+		<script src="script/viewscenarios.js" type="module"></script>
+		<script type="module" src="script/check.js"></script>
+	</head>
+	<body>
+		<div id="pageoverlay"><p class="centered-element"></p></div>
+		<div><ul id="navbar" class="w3-navbar w3-fhwa-navy"></ul></div>
+          
+		<div id="map-container" style="bottom:44px;" >
+			<div id="mapid" style="height: 100%"></div>
+		</div>
+
+          
+		<div id="footer" class="w3-bottom w3-fhwa-navy mapfooter">
+			<div style="height: 44px;">
+				<div id="timeslider-container" class="w3-fhwa-navy timeslider-container" style="width: 100%;padding: 11px 50px 11px 50px">
+					<div id="timeslider" class="timeslider">
+						<div class="ui-slider-handle"></div>
+					</div>
+				</div>
+			</div>
+<!--			<div style="display:flex; flex-direction: row; flex-wrap: wrap; height: 44px; align-items:end;">
+				<div style="flex: 1"></div>
+				<div id="timeslider-container" class="w3-fhwa-navy timeslider-container" style="flex-grow: 12; flex-shrink: 1">
+					<div id="timeslider" class="timeslider">
+						<div class="ui-slider-handle"></div>
+					</div>
+				</div>
+			<div style="flex: 1"></div>
+			</div>-->
+<!--			<div class="w3-container" >
+				<div id="divFooterControls">
+					<div id="divFooterControlsLeft"></div>
+					<div id="divFooterControlsRight"></div>
+				</div>
+			</div>-->
+		</div>
+		
+		<div id="dlgLoad"></div>
+		<div id="dlgStatus"></div>
+		<div id="dlgLayers"></div>
+		<div id="dlgDataTable"></div>
+		<div id="dlgLegend"></div>
+	</body>
+</html>
+

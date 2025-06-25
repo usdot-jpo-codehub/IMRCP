@@ -1,0 +1,35 @@
+  
+  .ui-slider  label 
+  {
+    position: absolute;
+    width: 60px;
+    margin-left: -30px;
+    text-align: center;
+}
+  .ui-slider  label.label-under 
+  {
+    margin-top: 13px;
+  }
+
+
+.slider-container
+{
+    padding-left: 1.5em;
+    padding-right: 2.5em;
+}
+
+  .slider-label-spacer
+  {
+    height: 21px;
+    margin-bottom:2px;
+  }
+  
+   .ui-slider > div.label-tick {
+    position: absolute;
+    width: 20px;
+    text-align: center;
+    
+    border-left: 1px solid #999;
+    height: 0.8em;
+    text-align: center;
+}

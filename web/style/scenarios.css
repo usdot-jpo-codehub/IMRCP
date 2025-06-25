@@ -1,0 +1,129 @@
+#grouplist,#selectScenarios,#legendlist
+{
+	list-style: none;
+	padding: 0;
+}
+
+#selectScenarios
+{
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+#grouplist > li,
+#selectScenarios > li
+{
+	margin: 2%;
+	height: 35px;
+	width: 96%;
+	position: relative;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+.hoverScenario
+{
+	opacity: .6;
+}
+
+
+.valuetable
+{
+	table-layout: fixed;
+	border-collapse: unset;
+	width: 100%;
+	border-spacing: 2px;
+	text-align: center;
+}
+
+#colAction
+{
+	width: 160px;
+}
+
+
+.colOffset
+{
+	width: 30px;
+}
+
+.valuetable input,
+.valuetable td,
+.valuetable tr
+{
+	width: 100%;
+}
+
+.ttip
+{
+    position:relative;
+}
+
+.ttip:hover
+{
+	text-decoration:none;
+	z-index:1002;
+	position:relative;
+}
+
+.ttip::after
+{
+	content: attr(tip);
+	position:absolute;
+	z-index:1002;
+	bottom:27px;
+	left: -60px;
+	display:none;
+}
+
+.ttip:hover::after
+{
+	display:block;
+}
+
+.ttip:hover:before
+{
+	display:block;
+}
+
+.ttip-content,.ttip::after  
+{
+	font-size: 12px;
+	font-style:normal;
+	line-height:1.2em;
+	width:120px;
+	padding:5px 10px;
+	border-radius:6px;
+	color: #000!important;
+	background-color: #fff!important;
+	box-shadow: 3px 3px 4px rgba(0,0,0, .65);
+	z-index:1002;
+	text-align: center;
+}
+
+.colorbox
+{
+	width: 35px;
+	height: 100%;
+	border: 1px solid black;
+	flex: 1;
+}
+
+.counter
+{
+	width: 30px;
+	text-align: right;
+}
+
+#btnDone
+{
+	width: 120px;
+}
+
+.ui-button-disabled
+{
+	cursor: not-allowed !important;
+}

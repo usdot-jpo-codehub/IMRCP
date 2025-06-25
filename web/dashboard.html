@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style/w3.css"/>
+<link rel="stylesheet" href="style/font-awesome.min.css"/>
+<link rel="stylesheet" href="style/pure-min.css"/>
+<link rel="stylesheet" href="style/imrcp.css"/>
+<link rel="stylesheet" href="style/dashboard.css"/>
+<link href="style/jquery/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+<link href="style/jquery/themes/overcast/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"/>
+<script type="text/javascript" src="script/jquery/jquery.js"></script>
+<script type="text/javascript" src="script/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="script/moment.min.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<script src="script/Chart.min.js"></script>
+<script src="script/jquery/jquery.dataTables.min.js"></script>
+<script type="module" src="script/dashboard.js"></script>
+<script type="module" src="script/check.js"></script>
+<title>IMRCP Dashboard</title>
+<style>
+.container {
+  display: flex;
+  height: 94vh; /* Set the container height to fill the viewport */
+}
+
+.column {
+  flex: 1; /* Each column takes up equal space */
+  display: flex;
+  flex-direction: column; /* Columns arranged vertically */
+}
+
+.row {
+  flex: 1; /* Each row takes up equal space */
+  display: flex;
+}
+
+.row:first-child {
+  flex: 2; /* Make the first row two-thirds the height */
+}
+
+.cell {
+  flex: 1; /* Each cell takes up equal space */
+
+}
+
+.padded
+{
+	padding: 10px; 
+	position: relative;
+	width: 100%;
+}
+
+#mapid, #tableid
+{
+	width: 100%;
+	height: 100%;
+}
+
+#tableid tr
+{
+	cursor: grab;
+}
+
+.pointer
+{
+	cursor: pointer;
+}
+
+
+.text-center
+{
+	text-align: center;
+}
+
+#chartid, #mapid, #mything
+{
+	border: 1px solid #000; /* Add border for visualization */
+}
+
+.redhighlight
+{
+	border: 2px solid #f00;
+}
+
+.icon
+{
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.125em;
+}
+  
+.outerflex
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 10px;
+	margin-bottom: 10px;
+}
+
+.outerflex button
+{
+	width: 110px
+}
+
+
+.outerflex button > i,
+.outerflex button > svg
+{
+	margin-right: 6px;
+}
+
+
+.outerflex button:enabled
+{
+	border-width: 3px;
+}
+
+.outerflex :disabled
+{
+	cursor: not-allowed;
+}
+
+#mapoverlay
+{
+	opacity: 0;
+	display: none;
+	width: 100%;
+	height: 98%;
+	z-index: 99999;
+	cursor: wait;
+	background-color: black;
+	position: absolute;
+}
+
+#tableoverlay
+{
+	opacity: 1;
+	width: 98%;
+	display:none;
+	height: 98%;
+	z-index: 99999;
+	cursor: not-allowed;
+	background-color: transparent;
+	position: absolute;
+}
+
+#mapoverlay > p
+{
+	color: white;
+}
+</style>
+</head>
+<body>
+	<div id="pageoverlay"><p class="centered-element"></p></div>
+	<div><ul id="navbar" class="w3-navbar w3-fhwa-navy"></ul></div>
+	<div class="container">
+		<div class="column">
+			<div class="row" style="overflow-y:scroll;">
+				<div class="cell padded">
+					<div id="tableoverlay"></div>
+					<table class="cell-border hover" id="tableid"></table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="cell padded">
+					<canvas id="chartid" style="display:none"></canvas>
+					<div id="editctrls" style="display:none">
+						<div class="outerflex">
+							<div id="instructiontxt" style="flex: 3;">Instructions</div>
+							<div style="flex: 2; display: flex; column-gap: 10px;">
+								<div style="flex: 1;"><button id="btn-Prev" type="button"><i class="fa fa-arrow-circle-left"></i>Prev Step</button></div>
+								<div style="flex: 1;"><button id="btn-Next" type="button"><i class="fa fa-arrow-circle-right"></i>Next Step</button></div>
+							</div>
+						</div>
+						<div class="outerflex">
+							<div style="flex: 3; display:flex; column-gap:10px;">
+								<select style="flex: 4;" class="obstypes obs1"></select>
+								<select style="flex: 1;" class="comps obs1"></select>
+								<div style="flex: 3;">
+									<input  class="obs1 values" type="text" placeholder="Value to compare">
+									<select style="display: none;" class="obs1 lookups"></select>
+								</div>
+								<div style="flex:1;" class="units"></div>
+							</div>
+							<div style="flex: 1;"></div>
+							<div style="flex: 1;"></div>
+						</div>
+						<div class="outerflex">
+							<div style="flex: 3;">
+								<div>
+									<input type="radio" value="and" name="and" class="and" checked>&nbsp;<label>And</label>&nbsp;&nbsp;
+									<input type="radio" value="or" name="and" class="and">&nbsp;<label>Or</label>
+									<input type="radio" value="none" name="and" class="and">&nbsp;<label>None</label>
+								</div>
+							</div>
+							<div style="display:flex; column-gap:10px; flex: 2;">
+								<div style="flex: 1;"><button id="btn-DrawRegion">Region</button></div>
+								<div style="flex: 1;"><button id="btn-PickRoads"><i class="fa fa-road"></i>Roads</button></div>
+							</div>
+						</div>
+						<div class="outerflex">
+							<div style="flex: 3; display:flex; column-gap:10px;">
+								<select style="flex: 4;" class="obstypes obs2" name="obs"></select>
+								<select style="flex: 1;" class="comps obs2" name="comp"></select>
+								<div style="flex: 3;">
+									<input  class="obs2 values" type="text" placeholder="Value to compare">
+									<select style="display: none;" class="obs2 lookups"></select>
+								</div>
+								<div style="flex:1;" class="units"></div>
+								
+							</div>
+							<div style="display:flex; column-gap:10px; flex: 2;">
+								<div style="flex: 1;"><button id="btn-PickAll"><i class="fa fa-code-fork"></i>All</button></div>
+								<div style="flex: 1;"></div>
+							</div>
+						</div>
+						<div class="outerflex">
+							<div style="flex: 3">
+								<input style="width: 90%;" id="alertLabel" type="text" placeholder="Enter a label for the alert">
+							</div>
+							<div style="display:flex; column-gap:10px; flex: 2;">
+								<div style="flex: 1;"><button id="btn-Save"><i class="fa fa-save"></i>Save</button></div>
+								<div style="flex: 1;"><button id="btn-Cancel"><i class="fa fa-times"></i>Cancel</button></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="column">
+			<div class="row">
+				
+				<div class="cell padded">
+					<div id="mapoverlay"><p class="centered-element"></p></div>
+					<div id="mapid"></div>
+				</div>
+			</div>
+		</div>		
+	</div>
+	<div id="dlgConfirmDelete"></div>
+</body>
+</html>

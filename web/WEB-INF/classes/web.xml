@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+		<display-name>IMRCP</display-name>
+
+		<filter>
+				<filter-name>HSTS</filter-name>
+				<filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+				<init-param>
+						<param-name>hstsMaxAgeSeconds</param-name>
+						<param-value>16000000</param-value>
+				</init-param>
+				<init-param>
+						<param-name>hstsIncludeSubDomains</param-name>
+						<param-value>true</param-value>
+				</init-param>
+		</filter>
+
+		<filter-mapping>
+				<filter-name>HSTS</filter-name>
+				<url-pattern>/api/*</url-pattern>
+		</filter-mapping>
+
+
+		<servlet>
+				<servlet-name>ImrcpDirectory</servlet-name>
+				<servlet-class>imrcp.system.Directory</servlet-class>
+
+				<init-param>
+						<description>REQUIRED: path for the configuration file</description>
+						<param-name>config-dir</param-name>
+						<param-value>/opt/imrcp05.06/webapps/IMRCP/config</param-value>
+				</init-param>
+
+				<load-on-startup>1</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>ImrcpDirectory</servlet-name>
+				<url-pattern>/api/Directory</url-pattern>
+		</servlet-mapping>
+
+
+		<servlet>
+				<servlet-name>SessMgr</servlet-name>
+				<servlet-class>imrcp.web.SessMgr</servlet-class>
+
+				<init-param>
+						<description>OPTIONAL: session timeout in milliseconds</description>
+						<param-name>timeout</param-name>
+						<param-value>18000000</param-value>
+				 </init-param>
+
+				<init-param>
+						<description>REQUIRED: path to user credential file</description>
+						<param-name>pwdfile</param-name>
+						<param-value>/opt/imrcp05.06/webapps/IMRCP/user.csv</param-value>
+				 </init-param>
+
+				<init-param>
+						<description>REQUIRED: path for the users directory</description>
+						<param-name>userdir</param-name>
+						<param-value>/opt/imrcp05.06/webapps/IMRCP/users</param-value>
+				 </init-param>
+
+				<load-on-startup>0</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>SessMgr</servlet-name>
+				<url-pattern>/api/auth/*</url-pattern>
+		</servlet-mapping>
+
+
+		<servlet>
+				<servlet-name>NetworkGeneration</servlet-name>
+				<servlet-class>imrcp.web.NetworkGeneration</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>NetworkGeneration</servlet-name>
+				<url-pattern>/api/generatenetwork/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>MonitorServlet</servlet-name>
+				<servlet-class>imrcp.web.MonitorServlet</servlet-class>
+
+				<load-on-startup>2</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>MonitorServlet</servlet-name>
+				<url-pattern>/api/monitor/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>Subscriptions</servlet-name>
+				<servlet-class>imrcp.web.Subscriptions</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>Subscriptions</servlet-name>
+				<url-pattern>/api/reports/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>UserSettingsServlet</servlet-name>
+				<servlet-class>imrcp.web.UserSettingsServlet</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>UserSettingsServlet</servlet-name>
+				<url-pattern>/api/settings/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>PointsLayerServlet</servlet-name>
+				<servlet-class>imrcp.web.layers.PointsLayerServlet</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>PointsLayerServlet</servlet-name>
+				<url-pattern>/api/points/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>AreaLayerServlet</servlet-name>
+				<servlet-class>imrcp.web.layers.AreaLayerServlet</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>AreaLayerServlet</servlet-name>
+				<url-pattern>/api/area/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>RoadLayerServlet</servlet-name>
+				<servlet-class>imrcp.web.layers.RoadLayerServlet</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>RoadLayerServlet</servlet-name>
+				<url-pattern>/api/road/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>Scenarios</servlet-name>
+				<servlet-class>imrcp.web.Scenarios</servlet-class>
+
+				<load-on-startup>4</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>Scenarios</servlet-name>
+				<url-pattern>/api/scenarios/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>TileServlet</servlet-name>
+				<servlet-class>imrcp.web.tiles.TileServlet</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>TileServlet</servlet-name>
+				<url-pattern>/api/mvt/*</url-pattern>
+				<url-pattern>/api/networkGeo/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>CommonMapServlet</servlet-name>
+				<servlet-class>imrcp.web.CommonMapServlet</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>CommonMapServlet</servlet-name>
+				<url-pattern>/api/map/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>UserManagementServlet</servlet-name>
+				<servlet-class>imrcp.web.UserManagementServlet</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>UserManagementServlet</servlet-name>
+				<url-pattern>/api/user/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>MLPHurricane</servlet-name>
+				<servlet-class>imrcp.forecast.mlp.MLPHurricane</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>MLPHurricane</servlet-name>
+				<url-pattern>/api/mlphur/*</url-pattern>
+		</servlet-mapping>
+
+		<servlet>
+				<servlet-name>MLP</servlet-name>
+				<servlet-class>imrcp.forecast.mlp.MLP</servlet-class>
+
+				<load-on-startup>3</load-on-startup>
+		</servlet>
+
+		<servlet-mapping>
+				<servlet-name>MLP</servlet-name>
+				<url-pattern>/api/mlp/*</url-pattern>
+		</servlet-mapping>
+
+
+</web-app>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IMRCP Map</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style/w3.css"/> 
+		<link rel="stylesheet" href="style/pure-min.css"/>
+		<link href="style/jquery/themes/overcast/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<link href="style/jquery/jquery.ui.labeledslider.min.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="style/font-awesome.min.css"/>
+		<link href="style/jquery/jquery.datetimepicker.css" rel="stylesheet">
+		<link href="style/jquery/jquery.notifications.dialog.css" rel="stylesheet" />
+		<link href="style/jquery/jquery.divStack.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"/>
+		<link href="style/imrcp.css" rel="stylesheet">
+		<script type="text/javascript" src="script/jquery/jquery.js"></script>
+		<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script> 
+		<script type="text/javascript" src="script/jquery/jquery-ui.js"></script>
+		<script type="text/javascript" src="script/moment.min.js"></script>
+		<script type="text/javascript" src="script/Chart.min.js"></script>
+		<script src="script/summary-map.js" type="module"></script>
+		<script type="module" src="script/check.js"></script>
+	</head>
+	<body>
+		<div id="pageoverlay"><p class="centered-element"></p></div>
+		<div id="divNotificationDialog"></div>
+		<div><ul id="navbar" class="w3-navbar w3-fhwa-navy"></ul></div>          
+		<div id="map-container" >
+			<div id="mapid" style="height: 100%"></div>
+		</div>
+
+          
+		<div id="footer" class="w3-bottom w3-fhwa-navy mapfooter">
+			<div style="display:flex; flex-direction: row; flex-wrap: wrap;">
+				<div id="legendDeck">
+					<div id="viewsPane" title="Views">
+						<div>
+							<ul class="w3-ul ul-no-border obstype-pane-list">
+								<li><button type="button" class="obs-group-btn">Tropical Storms</button>
+									<ul class="w3-ul ul-no-border" style="margin-left:14px;">
+										<li>Tropical Storm Cone<i class="w3-right fa fa-window-restore clickable" aria-hidden="true"></i></li>
+										<li>Tropical Storm Category<i class="w3-right	fa fa-window-restore clickable" aria-hidden="true"></i></li>
+										<li>Wind Speed (mph)<i class="w3-right	fa fa-window-restore clickable" aria-hidden="true"></i></li>
+									</ul>	
+								</li>
+								<li><button type="button" class="obs-group-btn">Winter Storms</button>
+									<ul class="w3-ul ul-no-border" style="margin-left:14px;">
+										<li>Precip Rate and Type<i class="w3-right fa fa-window-restore clickable" aria-hidden="true"></i></li>
+										<li>Pavement State<i class="w3-right fa fa-window-restore clickable" aria-hidden="true"></i></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="settingsPane" title="Settings">
+						<div>
+							<br>
+							<ul class="w3-ul ul-no-border">
+								<li><label><input type="checkbox" id="chkLonLat" /> Show Lon/Lat</label></li><br>
+								<li><label>Auto Refresh</label>
+									<select id="selAutoRefresh">
+										<option value="0">No Refresh</option>
+										<option value="2">2 Minutes</option>
+										<option value="5">5 Minutes</option>
+									</select>
+								</li><br>
+								<li><label>Area Layer Opacity</label>
+									<select id="selOpacity">
+										<option value="10">10%</option>
+										<option value="20">20%</option>
+										<option value="30">30%</option>
+										<option value="40" selected="selected">40%</option>
+										<option value="50">50%</option>
+										<option value="60">60%</option>
+										<option value="70">70%</option>
+										<option value="80">80%</option>
+										<option value="90">90%</option>
+										<option value="100">100%</option>
+									</select>
+								</li><br>
+								<li><label>Default View</label>
+									<select id="selPage">
+										<option value="map.html">Map</option>
+										<option value="dashboard.html">Dashboard</option>
+									</select>
+								</li>
+							</ul>
+						</div>
+						<br><br>
+						<div>
+							<ul class="w3-ul ul-no-border">
+								<li>Selected layers, current map position, zoom, and time slider are also saved</li>
+								<li><button type="button" id="save-user-view">Save as Default</button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div style="flex-grow: 1; flex-basis: 1.5%;"></div><!-- comment -->
+				
+				<div id="timeslider-container" class="w3-fhwa-navy timeslider-container">
+					<div id="timeslider" class="timeslider">
+						<div class="ui-slider-handle"></div>
+					</div>
+				</div>
+				
+				
+				<div class="flex-row-break"></div>
+				<div class="tooltip" tip="set reference time" style="flex-grow: 1; flex-basis: 1.5%;">
+					<div><input type="button" class="footer-button" id="btnTime" value="0000/00/00" /></div>
+					<div id="divInputContainer"><input type="text" id="txtTime" style="width: 0;" /></div>
+				</div>
+				<div id="dateslider-container" class="w3-fhwa-navy timeslider-container">
+					<div id="dateslider" class="timeslider">
+						<div class="ui-slider-handle"></div>
+					</div>
+				</div>
+
+			</div>
+			<div class="w3-container" >
+				<div id="divFooterControls">
+					<div id="divFooterControlsLeft"></div>
+					<div id="divFooterControlsRight"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

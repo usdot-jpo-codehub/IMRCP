@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>IMRCP Network Creation</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style/w3.css"/> 
+		<link rel="stylesheet" href="style/pure-min.css"/>
+		<link href="style/jquery/themes/overcast/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<link rel="stylesheet" href="style/font-awesome.min.css"/>
+		<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"/>
+		<link href="style/imrcp.css" rel="stylesheet">
+		<script type="text/javascript" src="script/jquery/jquery.js"></script>
+		<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+		<script type="text/javascript" src="script/jquery/jquery-ui.js"></script>
+		<script type="module" src="script/network.js"></script>
+		<script type="module" src="script/check.js"></script>
+		</head>
+	<body>
+		<div id="pageoverlay"><p class="centered-element"></p></div>
+
+		<div><ul id="navbar" class="w3-navbar w3-fhwa-navy"></ul></div>		
+
+		<div id="map-container">
+			<div id="mapid" style="height: 100%"></div>
+		</div>
+
+		<div id="dlgNetwork" title="Create Network"></div>
+		<div id="dlgCancel" title="Confirm Cancel"></div>
+		<div id="dlgRoadLegend" title="Road Types"></div>
+		<div id="dlgInstructions"></div>
+		<div id="dlgNetworkLegend" title="Network Legend"></div>
+		<div id="dlgDetectorLegend" title="Detector Status"></div>
+		<div id="dlgDetectorEdit" title="Edit Detector"></div>
+		<div id="dlgDetectorStatus" title="Detector File Loaded"></div>
+		<div id="dlgUploadConfirm" title="Confirm Upload"></div>
+		<div id="dlgNetworkMetadata" title="Network Metadata"></div>
+		<div id="dlgReprocess" title="Confirm Reprocess"></div>
+		<div id="dlgDeleteConfirm" title="Confirm Delete"></div>
+		<div id="dlgPublishConfirm" title="Confirm Publish"></div>
+		<div id="dlgTrainingConfirm" title="Confirm Training"></div>
+		<div id="dlgEditPublishConfirm" title="Confirm Edit Published Network"></div>
+		<div id="dlgOverwritePublishConfirm" title="Confirm Overwrite Published Network"></div>
+		<div id="dlgNetworkSelect" title="Confirm Reprocess"></div>
+		<input type="file" id="detectorFile" style="display:none;"/>
+
+		<div id="footer" class="w3-bottom w3-fhwa-navy"></div>
+	</body>
+</html>
+
