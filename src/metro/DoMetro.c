@@ -583,9 +583,10 @@
 
 	int metroTimesPerHour = SEC_PER_HOUR/fTimeStep;  //30 second time steps
         int i;
-	
+
         //set bridge flag
         BOOL bFlat = bBridge;
+
         // Set up subsurface materials and depths (need to reverse order). For our purposes assuming everything is .5m of asphalt.
         long nNbrOfZone = 1;
         int extra_layer = 1; // Do_Metro() adds a sand layer at the bottom for roads
@@ -596,7 +597,6 @@
         //assuming all roads are .5 meters of asphalt, METRo code adds another layer of sand at the bottom
         dZones[0] = .5;
         nMateriau[0] = 1;
-
 
         BOOL bNoObs[4];
         bNoObs[0] = 0;    //set to 1 if first observation is at or after the first forecast time
@@ -615,11 +615,12 @@
         double dFFO[nLenObservation];
         long lRC[nLenObservation];
         int j;
-        for (i = 0; i < nObservationHrs - 1; i++)
+        for (i = 0; i < nObservationHrs; i++)
             dTimeO[i * metroTimesPerHour] = cdObsTime[i];
         for (i = 0; i < nObservationHrs - 1; i++)
             for (j = 1; j < metroTimesPerHour; j ++)
                 dTimeO[j + (i * metroTimesPerHour)] = dTimeO[(j + (i * metroTimesPerHour)) - 1] + (1.0/120.0);
+
         //interpolate all of the observation data.
         interp(dTRO, nLenObservation, cdObsRoadTemp, nObservationHrs, metroTimesPerHour, 0);
         interp(dDTO, nLenObservation, cdObsSubSurfTemp, nObservationHrs, metroTimesPerHour, 0);

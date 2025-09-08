@@ -6,6 +6,9 @@
 package imrcp.collect;
 
 import imrcp.system.FilenameFormatter;
+import imrcp.system.OneTimeReentrantLock;
+import imrcp.system.ResourceRecord;
+import java.util.ArrayList;
 import org.json.JSONObject;
 
 /**
@@ -29,6 +32,8 @@ public abstract class Collector extends TileFileWriter
 	protected int m_nSourceId;
 	
 	protected boolean m_bCollectRT;
+	
+	protected boolean m_bProcessRT;
 	/**
 	 *
 	 */
@@ -49,6 +54,7 @@ public abstract class Collector extends TileFileWriter
 		if (m_nSourceId == 0)
 			m_nSourceId = Integer.MIN_VALUE;
 		m_bCollectRT = oBlockConfig.optBoolean("collectrt", true);
+		m_bProcessRT = oBlockConfig.optBoolean("processrt", true);
 	}
 	
 	
@@ -89,5 +95,14 @@ public abstract class Collector extends TileFileWriter
 	protected long getEndTime(long lRecvTime, int nRange, int nDelay, int nFileIndex)
 	{
 		return lRecvTime + nDelay + nRange + (nFileIndex * nRange);
+	}
+	
+	@Override
+	protected OneTimeReentrantLock processRealTime(ArrayList<ResourceRecord> oRRs, long lQueryStart, long lQueryEnd, long lQueryRef)
+	{
+		if (m_bProcessRT)
+			super.processRealTime(oRRs, lQueryStart, lQueryEnd, lQueryRef);
+		
+		return null;
 	}
 }

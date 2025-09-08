@@ -235,7 +235,6 @@
             WRITE(*,*) "Please increase the tickness of your "
             WRITE(*,*) " layer, especially the cement if present"
             ECHEC = .true.
-            flush(6)
             return
          END IF
       END DO
@@ -254,6 +253,7 @@
       if( .not. bSilent) then
          WRITE(*,*) "GRILLE ROUTINE ENDED"      
       end if
-      flush(6)
+      
+
       RETURN
       END SUBROUTINE GRILLE

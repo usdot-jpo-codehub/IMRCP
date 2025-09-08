@@ -290,7 +290,8 @@ public class MLP extends TileFileWriter
 				MLPSession oOneshotSess = oSessions.get(nIndex);
 				oOneshotSess.m_oScenario = oScenario;
 				oOneshotSess.m_sDirectory = sBaseDir + oScenario.m_sId + "/";
-				oOneshotSess.m_sExtendedLtsDirectory = oOneshotSess.m_sDirectory;
+				Path oLtsOutputDir = Paths.get(String.format(oOneshotSess.m_sDirectory + m_sLtsInputFf, oOneshotSess.m_nX, oOneshotSess.m_nY));
+				oOneshotSess.m_sExtendedLtsDirectory = oLtsOutputDir.getParent().toString() + "/";
 				oOneshotSess.m_nForecastOffset = nForecastOffset;
 				oOneshotSess.m_lRefTime = lRefTime;
 				oOneshotSess.createOneshotInputFiles();
