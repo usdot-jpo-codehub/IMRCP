@@ -3789,11 +3789,5 @@ public final class VectorTile {
   }
 
 ////   @@protoc_insertion_point(outer_class_scope)
-  	public static void main(String[] sArgs)
-		throws Exception
-	{
-		vector_tile.VectorTile.Tile oVt = VectorTile.Tile.parseFrom(new java.io.FileInputStream("C:/Users/aaron.cherney/Documents/IMRCP/173"));
-		System.out.println(oVt.toString());
 
-	}
 }

@@ -269,7 +269,6 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
 		  dpZones, npMateriau, &dDiff, stTemperatureDepth.pdArray, \
 		  stEc.plArray, dpCapacity, dpConductivity, &dSstDepth);
   if(*(stEc.plArray)){
-    printf("grille failed in fortran\n");
     goto liberation;
   }
 
@@ -277,6 +276,7 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
   /*  Those -1 is because it is use in fortran */
   nDeltaTIndice = (dDeltaT)*3600/30.-1;
   nLenObservation = nLenObservation -1;
+
 
   /***********************************************************************/
   /*   Coupling is different if there is more or less than 3 hours.     */
@@ -442,7 +442,7 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
     stTemperatureDepth.pdArray = NULL;
     free(stLT.pdArray);
     stLT.pdArray = NULL;
-   fflush(stdout);
+
 }/* End Do_Metro */
 
 

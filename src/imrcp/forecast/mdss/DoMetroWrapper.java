@@ -553,7 +553,7 @@ public class DoMetroWrapper implements Runnable
 				m_dAirTemp[i] = m_dObsAirTemp[m_dObsAirTemp.length - 1];
 				m_dDewPoint[i] = m_dObsDewPoint[m_dObsDewPoint.length - 1];
 				m_dWindSpeed[i] = m_dObsWindSpeed[m_dObsWindSpeed.length - 1];
-				m_dCloudCover[i] = getValue(oObsSet.m_oFcstCloudCover[i], nBoundingPolygon) / 12.5; // convert % to "octal"
+				m_dCloudCover[i] = Math.round(getValue(oObsSet.m_oFcstCloudCover[i], nBoundingPolygon) / 12.5); // convert % to "octal"
 				m_dSfcPres[i] = getValue(oObsSet.m_oFcstSfcPres[i], nBoundingPolygon) * 100; // convert mbar to Pa
 
 				m_dRainReservoir = getValue(oObsSet.m_oRainRes, nSegmentPolygon);
@@ -606,7 +606,7 @@ public class DoMetroWrapper implements Runnable
 				m_dAirTemp[i] = getValue(oObsSet.m_oFcstAirTemp[i], nBoundingPolygon);
 				m_dDewPoint[i] = getValue(oObsSet.m_oFcstDewPoint[i], nBoundingPolygon);
 				m_dWindSpeed[i] = getValue(oObsSet.m_oFcstWindSpeed[i], nBoundingPolygon);
-				m_dCloudCover[i] = getValue(oObsSet.m_oFcstCloudCover[i], nBoundingPolygon) / 12.5; // convert % to "octal"
+				m_dCloudCover[i] = Math.round(getValue(oObsSet.m_oFcstCloudCover[i], nBoundingPolygon) / 12.5); // convert % to "octal"
 				m_dSfcPres[i] = getValue(oObsSet.m_oFcstSfcPres[i], nBoundingPolygon) * 100; // convert mbar to Pa
 
 				int nPrecipIndex = i * 120; // multiply by 120 because RAP precip values are valid for an hour

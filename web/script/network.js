@@ -269,7 +269,10 @@ function clickNetwork(oEvent)
 {
 	let oFeatures = g_oMap.queryRenderedFeatures([[oEvent.point.x - 2, oEvent.point.y + 2], [oEvent.point.x + 2, oEvent.point.y - 2]], {'layers': ['network-polygons']});
 	if (oFeatures.length === 0)
+	{
+		oClickedNetworks = null;
 		return;
+	}
 	
 	g_oClickedNetworks = oFeatures;
 	if (oFeatures.length === 1)

@@ -401,7 +401,9 @@ public class NWS extends Collector
 					
 					if (lFileStart < lProcessLimit && lRecv >= lPastProcessLimit)
 					{
-						oLocks.addLast(processRealTime(oResourceRecords, lQueueStart, lQueueEnd, lQueueRecv));
+						OneTimeReentrantLock oLock = processRealTime(oResourceRecords, lQueueStart, lQueueEnd, lQueueRecv);
+						if (oLock != null)
+							oLocks.addLast(oLock);
 					}
 				}
 			}

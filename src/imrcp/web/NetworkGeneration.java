@@ -775,8 +775,7 @@ public class NetworkGeneration extends SecureBaseBlock
 			}
 			
 			Introsort.usort(oList.m_oOriginalWays, Id.COMPARATOR);
-			Network oNetwork = oWays.getNetwork(sNetworkId);
-			oList.m_oWays.addAll(oNetwork.m_oNetworkWays);
+			new OsmBinParser().parseFile(sGeoFile, oNodes, oList.m_oWays, oPool);
 			sLineBuf.append('[');
 			for (OsmWay oWay : oList.m_oWays)
 			{
@@ -982,6 +981,7 @@ public class NetworkGeneration extends SecureBaseBlock
 					oRet.m_oAdd.clear();
 					oRet.m_oRemove.clear();
 					oRet.m_oWays.clear();
+					oRet.m_sNetworkId = sNetworkId;
 				}
 
 				return oRet;

@@ -364,6 +364,6 @@
       if( .not. bSilent) then
          WRITE(*,*) "FIN BALANC"
       end if
-      flush(6)
+
       return
       end
